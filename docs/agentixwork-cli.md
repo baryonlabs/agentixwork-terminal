@@ -105,6 +105,29 @@ Future integrations:
 - Dock button / toolbar button inside the app.
 - Shortcut/automation entry point.
 
+## Future Theme CLI
+
+Theme control should eventually be available from the CLI as well as the app UI:
+
+```sh
+agentixwork theme system
+agentixwork theme light
+agentixwork theme dark
+agentixwork theme custom --accent "#4c71f2" --terminal-bg "#101216"
+agentixwork theme clear
+```
+
+The theme command should apply to the whole app:
+
+- Terminal surfaces.
+- Sidebar and tabs.
+- File explorer.
+- Browser chrome.
+- Notification rings.
+- Buttons, dialogs, badges, and future AgentixWork controls.
+
+The CLI should not overwrite `~/.config/ghostty/config` unless the user explicitly asks for export behavior.
+
 ## Relationship to cmux CLI
 
 The existing cmux CLI remains the low-level primitive.

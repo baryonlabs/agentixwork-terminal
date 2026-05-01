@@ -29,6 +29,7 @@ The first version should not replace cmux's core primitives. It should add a thi
 - A visible `Nvim` button in the file/sidebar area.
 - A file list button that opens or focuses cmux's existing file explorer.
 - A "last path" resolver that launches the editor in the directory most recently used by the focused terminal pane.
+- App-wide light/dark/custom theme controls that affect the terminal, sidebar, browser chrome, file explorer, buttons, badges, and future editor controls together.
 - Optional Zeude-style telemetry/config hooks later, after the local editor workflow is stable.
 
 ## V1 Scope
@@ -104,6 +105,53 @@ The first UI can be intentionally small:
 | `Nvim` | Launch `nvim` at target path |
 | `README` | Open README/Markdown preview when available |
 
+### 5. App-Wide Themes
+
+AgentixWork Terminal should treat theming as a whole-app setting, not only a terminal palette.
+
+Expected behavior:
+
+1. Support `System`, `Light`, `Dark`, and `Custom` appearance modes.
+2. Apply the chosen mode consistently to:
+   - Terminal surfaces powered by libghostty.
+   - Sidebar, tabs, split controls, command surfaces, dialogs, notifications, file explorer, and browser chrome.
+   - Future AgentixWork controls such as `Files`, `Nvim`, `New Project`, and agent/session status views.
+3. Keep compatibility with existing Ghostty theme config where possible.
+4. Allow custom colors for at least:
+   - App background.
+   - Sidebar background.
+   - Terminal background.
+   - Foreground/text.
+   - Accent color.
+   - Notification ring color.
+   - Git/status colors.
+5. Preview theme changes live before saving.
+6. Persist AgentixWork overrides separately from upstream Ghostty config so user configs are not silently overwritten.
+7. Provide reset behavior:
+   - Reset to system.
+   - Reset to Ghostty defaults.
+   - Clear AgentixWork custom colors.
+
+Implementation notes:
+
+- Reuse existing cmux theme picker and `cmux themes` CLI primitives where they fit.
+- Add an AgentixWork theme model that maps app tokens to Swift/AppKit colors and terminal palette settings.
+- Keep terminal theme changes and app chrome changes in one transaction so light/dark mode never leaves mixed UI surfaces behind.
+- If a Ghostty theme only defines terminal colors, derive app chrome tokens from it instead of requiring every theme to define every UI color.
+
+Open TODO:
+
+- [ ] Audit current Swift/AppKit color sources and identify hard-coded colors.
+- [ ] Define `AgentixWorkTheme` fields and persistence location.
+- [ ] Map `System`, `Light`, `Dark`, and `Custom` modes to app-wide tokens.
+- [ ] Wire theme changes to sidebar, tabs, split views, file explorer, notification rings, browser chrome, and dialogs.
+- [ ] Bridge selected Ghostty terminal themes into AgentixWork app tokens.
+- [ ] Add custom color editor UI.
+- [ ] Add CLI contract: `agentixwork theme system|light|dark|custom`.
+- [ ] Add live preview and cancel/apply behavior.
+- [ ] Add tests for persistence, reset, and mode switching.
+- [ ] Verify no user `~/.config/ghostty/config` value is overwritten without explicit confirmation.
+
 ## Zeude Integration Direction
 
 Do not merge zeude wholesale in V1.
@@ -152,7 +200,15 @@ Possible V2 modules:
 - Do not silently overwrite `~/.config/nvim/init.lua`.
 - Offer backup and dry-run behavior before install.
 
-### Slice E: Zeude-style integration
+### Slice E: Whole-app theme system
+
+- Add `System`, `Light`, `Dark`, and `Custom` appearance modes.
+- Apply theme tokens to terminal surfaces and non-terminal app chrome together.
+- Reuse Ghostty/cmux theme primitives for terminal palettes.
+- Add custom color persistence and reset behavior.
+- Expose theme selection through UI and future CLI.
+
+### Slice F: Zeude-style integration
 
 - Add telemetry/config sync only after local workflow is stable.
 - Keep it opt-in.
@@ -165,6 +221,8 @@ Possible V2 modules:
 - Should AgentixWork use GPL-only distribution or pursue a cmux commercial license?
 - Which agent CLIs are first-class: Claude, Codex, OpenCode, Gemini?
 - Should Zeude remain a sidecar service or be embedded as an optional dashboard?
+- Should custom themes be stored in app preferences, repo-local config, or both?
+- Should AgentixWork custom colors be exported back to Ghostty-compatible config, or remain app-local overrides?
 
 ## Upstream Review
 
