@@ -22,6 +22,28 @@ It is intentionally small and should later be replaced by a Swift implementation
 
 ## Commands
 
+### `agentixwork new <name|path> [--nvim] [--no-open] [--git|--no-git]`
+
+Create a new project folder and start working in it.
+
+Default behavior:
+
+- A simple project name is created under `$AGENTIXWORK_PROJECTS_DIR`, or `~/dev` when the variable is not set.
+- A path such as `./apps/demo` or `/work/demo` is used directly.
+- Existing directories are reused.
+- `git init` runs when `git` is available and the folder is not already a Git repository.
+- The project opens with `cmux "$TARGET_DIR"` when `cmux` is available.
+
+Examples:
+
+```sh
+agentixwork new my-app
+agentixwork new ~/dev/my-app --nvim
+agentixwork new ./scratch/demo --no-open --no-git
+```
+
+This command is the first prototype for the future "new project" button in AgentixWork Terminal.
+
 ### `agentixwork nvim [path]`
 
 Open Neovim in the target directory.
@@ -91,6 +113,7 @@ AgentixWork CLI should be a workflow CLI:
 
 | Low-level cmux | AgentixWork wrapper |
 | --- | --- |
+| `mkdir -p <path>` + `cmux <path>` | `agentixwork new <name|path>` |
 | `cmux <path>` | `agentixwork open <path>` |
 | socket APIs | `agentixwork files <path>` |
 | custom commands | `agentixwork nvim <path>` |

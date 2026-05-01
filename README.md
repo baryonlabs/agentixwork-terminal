@@ -1,7 +1,7 @@
-<h1 align="center">cmux</h1>
-<p align="center">A Ghostty-based macOS terminal with vertical tabs and notifications for AI coding agents</p>
+<h1 align="center">AgentixWork Terminal</h1>
+<p align="center">A cmux-based terminal and CLI workspace for AI coding workflows</p>
 
-> AgentixWork Terminal fork note: this repository is being shaped into an OS-level terminal and CLI for AI coding workflows. See [NOTICE.agentixwork.md](NOTICE.agentixwork.md), [docs/agentixwork-terminal-roadmap.md](docs/agentixwork-terminal-roadmap.md), and [docs/agentixwork-cli.md](docs/agentixwork-cli.md).
+> Fork notice: AgentixWork Terminal is forked from [manaflow-ai/cmux](https://github.com/manaflow-ai/cmux). This repository keeps upstream attribution and license notices while adding an AgentixWork workflow layer for project creation, file editing, Neovim, and future AI-agent workspace controls. See [NOTICE.agentixwork.md](NOTICE.agentixwork.md), [docs/agentixwork-terminal-roadmap.md](docs/agentixwork-terminal-roadmap.md), and [docs/agentixwork-cli.md](docs/agentixwork-cli.md).
 
 <p align="center">
   <a href="https://github.com/manaflow-ai/cmux/releases/latest/download/cmux-macos.dmg">
@@ -26,6 +26,26 @@
 <p align="center">
   <a href="https://www.youtube.com/watch?v=i-WxO5YUTOs">▶ Demo video</a> · <a href="https://cmux.com/blog/zen-of-cmux">The Zen of cmux</a>
 </p>
+
+## Start a New Project
+
+AgentixWork adds a small CLI prototype so a new coding workspace can start from one command:
+
+```bash
+Prototypes/agentixwork-cli/agentixwork new my-app
+```
+
+By default, simple names are created under `~/dev`, initialized as Git repositories when `git` is available, and opened with `cmux` when the CLI is installed. To create the folder and jump straight into Neovim:
+
+```bash
+Prototypes/agentixwork-cli/agentixwork new my-app --nvim
+```
+
+Set `AGENTIXWORK_PROJECTS_DIR` to choose a different default parent folder:
+
+```bash
+export AGENTIXWORK_PROJECTS_DIR="$HOME/work"
+```
 
 ## Features
 

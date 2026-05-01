@@ -6,10 +6,18 @@ usage() {
 agentixwork - workflow CLI prototype for AgentixWork Terminal
 
 Usage:
+  agentixwork new <name|path> [--nvim] [--no-open] [--git|--no-git]
+                          Create a project folder and start working
   agentixwork nvim [path]    Open nvim in a resolved project directory
   agentixwork files [path]   Open/focus file list for a directory
   agentixwork open [path]    Open a directory in cmux/AgentixWork
   agentixwork doctor         Check local tools
+
+New project defaults:
+  - Simple names are created under AGENTIXWORK_PROJECTS_DIR or ~/dev
+  - Existing directories are reused
+  - git init runs when git is available
+  - cmux opens the project unless --no-open or --nvim is used
 
 Target path resolution:
   1. explicit path
@@ -52,12 +60,84 @@ resolve_target_dir() {
   return 1
 }
 
+project_target_path() {
+  local raw="${1:-}"
+  [[ -n "$raw" ]] || die "project name or path is required"
+  raw="${raw/#\~/$HOME}"
+
+  if [[ "$raw" == /* || "$raw" == */* ]]; then
+    print -- "$raw"
+    return 0
+  fi
+
+  local base="${AGENTIXWORK_PROJECTS_DIR:-$HOME/dev}"
+  print -- "$base/$raw"
+}
+
 cmd="${1:-help}"
 shift || true
 
 case "$cmd" in
   -h|--help|help)
     usage
+    ;;
+
+  new)
+    project_arg="${1:-}"
+    [[ -n "$project_arg" ]] || die "project name or path is required"
+    shift || true
+
+    open_after=1
+    nvim_after=0
+    git_init=1
+
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        --nvim)
+          nvim_after=1
+          open_after=0
+          ;;
+        --open)
+          open_after=1
+          ;;
+        --no-open)
+          open_after=0
+          ;;
+        --git)
+          git_init=1
+          ;;
+        --no-git)
+          git_init=0
+          ;;
+        *)
+          die "unknown option for new: $1"
+          ;;
+      esac
+      shift
+    done
+
+    target="$(project_target_path "$project_arg")"
+    mkdir -p "$target"
+    target="$(expand_path "$target")" || die "could not resolve created project directory"
+
+    if [[ "$git_init" -eq 1 && ! -d "$target/.git" ]] && command -v git >/dev/null 2>&1; then
+      git -C "$target" init >/dev/null
+    fi
+
+    print "created - $target"
+
+    if [[ "$nvim_after" -eq 1 ]]; then
+      command -v nvim >/dev/null 2>&1 || die "nvim is not installed or not on PATH"
+      cd "$target"
+      exec nvim
+    fi
+
+    if [[ "$open_after" -eq 1 ]]; then
+      if command -v cmux >/dev/null 2>&1; then
+        exec cmux "$target"
+      fi
+      print "warn - cmux not found on PATH; open this folder manually"
+    fi
     ;;
 
   nvim)
@@ -85,6 +165,7 @@ case "$cmd" in
 
   doctor)
     print "AgentixWork CLI prototype"
+    print "info - default project folder: ${AGENTIXWORK_PROJECTS_DIR:-$HOME/dev}"
     if command -v cmux >/dev/null 2>&1; then
       print "ok - cmux: $(command -v cmux)"
     else

@@ -1,7 +1,9 @@
 > 이 문서는 Claude가 번역했어요. 개선할 부분이 있다면 PR을 보내주세요.
 
-<h1 align="center">cmux</h1>
-<p align="center">세로 탭과 알림을 지원하는 AI 코딩 에이전트용 Ghostty 기반 macOS 터미널</p>
+<h1 align="center">AgentixWork Terminal</h1>
+<p align="center">AI 코딩 워크플로우를 위한 cmux 기반 터미널과 CLI 워크스페이스</p>
+
+> Fork 공지: AgentixWork Terminal은 [manaflow-ai/cmux](https://github.com/manaflow-ai/cmux)를 fork한 저장소입니다. 업스트림 저작권 표시와 라이선스를 유지하면서 프로젝트 생성, 파일 편집, Neovim, 향후 AI 에이전트 워크스페이스 제어를 위한 AgentixWork 워크플로우 레이어를 추가합니다. 자세한 내용은 [NOTICE.agentixwork.md](NOTICE.agentixwork.md), [docs/agentixwork-terminal-roadmap.md](docs/agentixwork-terminal-roadmap.md), [docs/agentixwork-cli.md](docs/agentixwork-cli.md)를 보세요.
 
 <p align="center">
   <a href="https://github.com/manaflow-ai/cmux/releases/latest/download/cmux-macos.dmg">
@@ -26,6 +28,26 @@
 <p align="center">
   <a href="https://www.youtube.com/watch?v=i-WxO5YUTOs">▶ 데모 영상</a> · <a href="https://cmux.com/blog/zen-of-cmux">The Zen of cmux</a>
 </p>
+
+## 새 프로젝트 시작
+
+AgentixWork는 새 코딩 워크스페이스를 한 명령으로 시작할 수 있도록 작은 CLI 프로토타입을 추가합니다.
+
+```bash
+Prototypes/agentixwork-cli/agentixwork new my-app
+```
+
+기본적으로 단순한 이름은 `~/dev` 아래에 생성되고, `git`이 있으면 Git 저장소로 초기화되며, `cmux` CLI가 설치되어 있으면 해당 폴더를 바로 엽니다. 폴더를 만들고 바로 Neovim으로 들어가려면 다음처럼 실행합니다.
+
+```bash
+Prototypes/agentixwork-cli/agentixwork new my-app --nvim
+```
+
+기본 상위 폴더를 바꾸려면 `AGENTIXWORK_PROJECTS_DIR`를 설정합니다.
+
+```bash
+export AGENTIXWORK_PROJECTS_DIR="$HOME/work"
+```
 
 ## 기능
 
