@@ -1,7 +1,7 @@
 > 이 문서는 Claude가 번역했어요. 개선할 부분이 있다면 PR을 보내주세요.
 
 <h1 align="center">AgentixWork Terminal</h1>
-<p align="center">AI 코딩 워크플로우를 위한 cmux 기반 터미널과 CLI 워크스페이스</p>
+<p align="center">여러 CLI 코딩 에이전트를 실행, 감독, 편집까지 이어주는 에이전트 운영 터미널</p>
 
 > Fork 공지: AgentixWork Terminal은 [manaflow-ai/cmux](https://github.com/manaflow-ai/cmux)를 fork한 저장소입니다. 업스트림 저작권 표시와 라이선스를 유지하면서 프로젝트 생성, 파일 편집, Neovim, 향후 AI 에이전트 워크스페이스 제어를 위한 AgentixWork 워크플로우 레이어를 추가합니다. 자세한 내용은 [NOTICE.agentixwork.md](NOTICE.agentixwork.md), [docs/agentixwork-terminal-roadmap.md](docs/agentixwork-terminal-roadmap.md), [docs/agentixwork-cli.md](docs/agentixwork-cli.md)를 보세요.
 
@@ -28,6 +28,14 @@
 <p align="center">
   <a href="https://www.youtube.com/watch?v=i-WxO5YUTOs">▶ 데모 영상</a> · <a href="https://cmux.com/blog/zen-of-cmux">The Zen of cmux</a>
 </p>
+
+## 정의
+
+AgentixWork Terminal은 Claude Code, Codex, OpenCode, Gemini CLI 같은 터미널 기반 코딩 에이전트를 여러 개 병렬로 실행하는 사람을 위한 **에이전트 운영 터미널**입니다.
+
+터미널을 작업의 중심에 두고, 그 주변에 필요한 운영 레이어를 더합니다. 새 프로젝트 생성, 파일 탐색기 접근, Neovim 실행, 브라우저 패널, 주의가 필요한 에이전트 알림, 워크스페이스 상태, 향후 agent/session 제어를 하나의 흐름으로 묶는 것이 목표입니다.
+
+**English definition:** AgentixWork Terminal is an **agent operations terminal**: a cmux-based workspace for running, supervising, and editing across multiple terminal-native coding agents while keeping the terminal as the primary work surface.
 
 ## 새 프로젝트 시작
 

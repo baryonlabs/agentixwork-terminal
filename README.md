@@ -1,5 +1,5 @@
 <h1 align="center">AgentixWork Terminal</h1>
-<p align="center">A cmux-based terminal and CLI workspace for AI coding workflows</p>
+<p align="center">An agent operations terminal for running, supervising, and editing across multiple CLI coding agents</p>
 
 > Fork notice: AgentixWork Terminal is forked from [manaflow-ai/cmux](https://github.com/manaflow-ai/cmux). This repository keeps upstream attribution and license notices while adding an AgentixWork workflow layer for project creation, file editing, Neovim, and future AI-agent workspace controls. See [NOTICE.agentixwork.md](NOTICE.agentixwork.md), [docs/agentixwork-terminal-roadmap.md](docs/agentixwork-terminal-roadmap.md), and [docs/agentixwork-cli.md](docs/agentixwork-cli.md).
 
@@ -26,6 +26,14 @@
 <p align="center">
   <a href="https://www.youtube.com/watch?v=i-WxO5YUTOs">▶ Demo video</a> · <a href="https://cmux.com/blog/zen-of-cmux">The Zen of cmux</a>
 </p>
+
+## Definition
+
+AgentixWork Terminal is an **agent operations terminal**: a cmux-based workspace for people who run Claude Code, Codex, OpenCode, Gemini CLI, and other terminal-native coding agents in parallel.
+
+It keeps the terminal as the center of work, then adds the missing operational layer around it: project creation, file explorer access, Neovim launch, browser panes, attention notifications, workspace state, and future agent/session controls.
+
+**한국어 정의:** AgentixWork Terminal은 여러 CLI 코딩 에이전트를 동시에 실행하고, 어느 작업이 사용자의 확인을 기다리는지 관찰하며, 파일 편집과 브라우저 테스트까지 이어주는 **에이전트 운영 터미널**입니다. cmux를 기반으로 하되, 새 프로젝트 시작, 파일 탐색, Neovim 실행, 작업 상태 관리 같은 AgentixWork 워크플로우를 더해 갑니다.
 
 ## Start a New Project
 
