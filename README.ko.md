@@ -1,7 +1,7 @@
 > 이 문서는 Claude가 번역했어요. 개선할 부분이 있다면 PR을 보내주세요.
 
 <h1 align="center">AgentixWork Terminal</h1>
-<p align="center">여러 CLI 코딩 에이전트를 실행, 감독, 편집까지 이어주는 에이전트 운영 터미널</p>
+<p align="center"><strong>한국어 정의:</strong> AgentixWork Terminal은 여러 CLI 코딩 에이전트를 동시에 실행하고, 어느 작업이 사용자의 확인을 기다리는지 관찰하며, 파일 편집과 브라우저 테스트까지 이어주는 <strong>에이전트 운영 터미널</strong>입니다. cmux를 기반으로 하되, 새 프로젝트 시작, 파일 탐색, Neovim 실행, 작업 상태 관리 같은 AgentixWork 워크플로우를 더해 갑니다.</p>
 
 > Fork 공지: AgentixWork Terminal은 [manaflow-ai/cmux](https://github.com/manaflow-ai/cmux)를 fork한 저장소입니다. 업스트림 저작권 표시와 라이선스를 유지하면서 프로젝트 생성, 파일 편집, Neovim, 향후 AI 에이전트 워크스페이스 제어를 위한 AgentixWork 워크플로우 레이어를 추가합니다. 자세한 내용은 [NOTICE.agentixwork.md](NOTICE.agentixwork.md), [docs/agentixwork-terminal-roadmap.md](docs/agentixwork-terminal-roadmap.md), [docs/agentixwork-cli.md](docs/agentixwork-cli.md)를 보세요.
 
