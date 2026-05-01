@@ -1,6 +1,8 @@
 <h1 align="center">cmux</h1>
 <p align="center">A Ghostty-based macOS terminal with vertical tabs and notifications for AI coding agents</p>
 
+> AgentixWork Terminal fork note: this repository is being shaped into an OS-level terminal and CLI for AI coding workflows. See [NOTICE.agentixwork.md](NOTICE.agentixwork.md), [docs/agentixwork-terminal-roadmap.md](docs/agentixwork-terminal-roadmap.md), and [docs/agentixwork-cli.md](docs/agentixwork-cli.md).
+
 <p align="center">
   <a href="https://github.com/manaflow-ai/cmux/releases/latest/download/cmux-macos.dmg">
     <img src="./docs/assets/macos-badge.png" alt="Download cmux for macOS" width="180" />

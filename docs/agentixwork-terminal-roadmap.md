@@ -8,6 +8,12 @@ Base:
 - Monitoring/config inspiration: `zep-us/zeude`
 - Neovim setup: `baryonlabs/cmux_setting_vscode_style_nvim`
 
+Attribution and import policy:
+
+```text
+NOTICE.agentixwork.md
+```
+
 ## License note
 
 cmux is GPL-3.0-or-later with a commercial option. A distributed fork that derives from cmux must follow the GPL terms unless a commercial license is arranged with Manaflow.
@@ -130,6 +136,8 @@ Possible V2 modules:
 - Add launch command builder.
 - Add UI button.
 - Add tests for path resolution.
+- Prototype CLI contract: `docs/agentixwork-cli.md`
+- Prototype executable: `Prototypes/agentixwork-cli/agentixwork`
 
 ### Slice C: File list button
 

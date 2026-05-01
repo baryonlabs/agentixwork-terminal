@@ -1,0 +1,105 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+agentixwork - workflow CLI prototype for AgentixWork Terminal
+
+Usage:
+  agentixwork nvim [path]    Open nvim in a resolved project directory
+  agentixwork files [path]   Open/focus file list for a directory
+  agentixwork open [path]    Open a directory in cmux/AgentixWork
+  agentixwork doctor         Check local tools
+
+Target path resolution:
+  1. explicit path
+  2. AGENTIXWORK_TARGET_DIR
+  3. CMUX_WORKSPACE_CWD
+  4. PWD
+  5. HOME
+EOF
+}
+
+die() {
+  print -u2 "agentixwork: $*"
+  exit 1
+}
+
+expand_path() {
+  local raw="${1:-}"
+  [[ -n "$raw" ]] || return 1
+  raw="${raw/#\~/$HOME}"
+  if [[ -d "$raw" ]]; then
+    (cd "$raw" && pwd -P)
+  elif [[ -e "$raw" ]]; then
+    (cd "$(dirname "$raw")" && pwd -P)
+  else
+    return 1
+  fi
+}
+
+resolve_target_dir() {
+  local explicit="${1:-}"
+  local candidate
+
+  for candidate in "$explicit" "${AGENTIXWORK_TARGET_DIR:-}" "${CMUX_WORKSPACE_CWD:-}" "${PWD:-}" "${HOME:-}"; do
+    if resolved="$(expand_path "$candidate" 2>/dev/null)"; then
+      print -- "$resolved"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+cmd="${1:-help}"
+shift || true
+
+case "$cmd" in
+  -h|--help|help)
+    usage
+    ;;
+
+  nvim)
+    target="$(resolve_target_dir "${1:-}")" || die "could not resolve target directory"
+    command -v nvim >/dev/null 2>&1 || die "nvim is not installed or not on PATH"
+    cd "$target"
+    exec nvim
+    ;;
+
+  files)
+    target="$(resolve_target_dir "${1:-}")" || die "could not resolve target directory"
+    if command -v cmux >/dev/null 2>&1; then
+      exec cmux open "$target"
+    fi
+    print -- "$target"
+    ;;
+
+  open)
+    target="$(resolve_target_dir "${1:-}")" || die "could not resolve target directory"
+    if command -v cmux >/dev/null 2>&1; then
+      exec cmux "$target"
+    fi
+    die "cmux is not installed or not on PATH"
+    ;;
+
+  doctor)
+    print "AgentixWork CLI prototype"
+    if command -v cmux >/dev/null 2>&1; then
+      print "ok - cmux: $(command -v cmux)"
+    else
+      print "warn - cmux not found on PATH"
+    fi
+    if command -v nvim >/dev/null 2>&1; then
+      print "ok - nvim: $(command -v nvim)"
+    else
+      print "warn - nvim not found on PATH"
+    fi
+    print "info - recommended Neovim setup: https://github.com/baryonlabs/cmux_setting_vscode_style_nvim"
+    ;;
+
+  *)
+    usage
+    die "unknown command: $cmd"
+    ;;
+esac
