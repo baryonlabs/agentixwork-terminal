@@ -157,3 +157,13 @@ Possible V2 modules:
 - Should AgentixWork use GPL-only distribution or pursue a cmux commercial license?
 - Which agent CLIs are first-class: Claude, Codex, OpenCode, Gemini?
 - Should Zeude remain a sidecar service or be embedded as an optional dashboard?
+
+## Upstream Review
+
+Before implementation, review the related upstream cmux and zeude issues in:
+
+```text
+docs/upstream-issue-review.md
+```
+
+The key conclusion is to reuse cmux's existing file explorer and add only a narrow `Nvim` launch action first.
