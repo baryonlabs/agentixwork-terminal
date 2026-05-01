@@ -1,5 +1,70 @@
 # TODO
 
+## AgentixWork Terminal
+
+AgentixWork-specific work for this fork. Keep upstream cmux TODOs below intact.
+
+### P0: Fork Identity and Safe Distribution
+- [x] Rename the primary README title to `AgentixWork Terminal`.
+- [x] Clearly disclose that this repository is forked from `manaflow-ai/cmux`.
+- [x] Preserve upstream attribution and license notices.
+- [ ] Audit remaining user-facing `cmux` strings and decide which should stay upstream-branded vs become AgentixWork-branded.
+- [ ] Decide GPL-only distribution vs commercial cmux license path before distributing signed public builds.
+
+### P0: New Project Workflow
+- [x] Add prototype CLI command: `agentixwork new <name|path>`.
+- [x] Create simple project names under `AGENTIXWORK_PROJECTS_DIR` or `~/dev`.
+- [x] Reuse existing folders safely.
+- [x] Initialize Git when available.
+- [x] Open with cmux by default when available.
+- [x] Support `--nvim`, `--no-open`, and `--no-git`.
+- [ ] Replace shell prototype with app-bundled Swift CLI implementation.
+- [ ] Add a visible `New Project` button in the app.
+- [ ] Add UI flow for choosing parent folder, project name, Git init, and editor launch.
+- [ ] Add tests for project path resolution, existing directory reuse, and invalid names.
+
+### P0: File Editing Workflow
+- [ ] Add visible `Files` button that opens or focuses the existing cmux file explorer.
+- [ ] Add visible `Nvim` button near file/sidebar controls.
+- [ ] Implement `AgentixWorkTargetPathResolver`.
+- [ ] Resolve target path from focused terminal pane, selected file explorer root, workspace directory, persisted last directory, then `$HOME`.
+- [ ] Launch `nvim` in the resolved target directory.
+- [ ] Decide whether `Nvim` opens in the focused pane, a new split, or a new workspace by default.
+- [ ] Add tests for local and SSH workspace path resolution.
+
+### P1: Neovim Setup Helper
+- [ ] Add app/menu/CLI helper that points to `https://github.com/baryonlabs/cmux_setting_vscode_style_nvim`.
+- [ ] Never overwrite `~/.config/nvim/init.lua` silently.
+- [ ] Provide dry-run and backup behavior before installation.
+- [ ] Detect installed `nvim`, `pngpaste`, `macism`, and recommended zsh helpers.
+- [ ] Document Korean input correction, Markdown preview, file explorer, mouse-friendly resizing, and VSCode-style shortcuts in the app help surface.
+
+### P1: App-Wide Theme System
+- [ ] Support `System`, `Light`, `Dark`, and `Custom` appearance modes.
+- [ ] Apply theme tokens to terminal, sidebar, tabs, split controls, file explorer, browser chrome, dialogs, badges, and notification rings together.
+- [ ] Audit current Swift/AppKit hard-coded colors.
+- [ ] Define `AgentixWorkTheme` fields and persistence location.
+- [ ] Bridge selected Ghostty/cmux terminal themes into AgentixWork app tokens.
+- [ ] Add custom color editor UI.
+- [ ] Add live preview with cancel/apply behavior.
+- [ ] Add reset options: system, Ghostty defaults, clear custom colors.
+- [ ] Add CLI contract: `agentixwork theme system|light|dark|custom|clear`.
+- [ ] Verify no user `~/.config/ghostty/config` value is overwritten without explicit confirmation.
+
+### P2: Agent Workspace Layer
+- [ ] Add first-class agent launch flows for Claude, Codex, OpenCode, and Gemini.
+- [ ] Add optional AgentixWork shim for wrapping agent CLIs.
+- [ ] Review Zeude concepts for config sync, skills/MCP distribution, and telemetry before importing any code.
+- [ ] Keep telemetry and config sync opt-in.
+- [ ] Document any third-party code copied or adapted before implementation.
+
+### P2: OS-Level Entry Points
+- [ ] Add Finder/Open With support for directories.
+- [ ] Add URL scheme: `agentixwork://open?path=...`.
+- [ ] Add Raycast/Alfred/Shortcuts entry point.
+- [ ] Add Dock/menu button that opens the last terminal path in AgentixWork.
+- [ ] Avoid duplicate workspaces when a target path is already open.
+
 ## Issue 151: Remote SSH (Living Execution)
 - [x] `cmux ssh` creates remote workspace metadata and does not require `--name`
 - [x] Remote daemon bootstrap/upload/start path with `cmuxd-remote serve --stdio`
