@@ -39,6 +39,14 @@ AgentixWork-specific work for this fork. Keep upstream cmux TODOs below intact.
 - [ ] Detect installed `nvim`, `pngpaste`, `macism`, and recommended zsh helpers.
 - [ ] Document Korean input correction, Markdown preview, file explorer, mouse-friendly resizing, and VSCode-style shortcuts in the app help surface.
 
+### P1: Terminal Review Workflow
+- [x] Recommend Hunk (`https://github.com/modem-dev/hunk`) for terminal-native review of agent-authored changes.
+- [x] Document install command: `npm i -g hunkdiff`.
+- [x] Add `hunk` detection to the prototype `agentixwork doctor`.
+- [ ] Add an app/CLI helper that opens `hunk diff --watch` in a new pane for the current workspace.
+- [ ] Add optional Git alias setup for `git hdiff` and `git hshow`.
+- [ ] Decide whether Hunk should be bundled, linked, or only recommended.
+
 ### P1: App-Wide Theme System
 - [ ] Support `System`, `Light`, `Dark`, and `Custom` appearance modes.
 - [ ] Apply theme tokens to terminal, sidebar, tabs, split controls, file explorer, browser chrome, dialogs, badges, and notification rings together.

@@ -93,7 +93,16 @@ Check local prerequisites:
 
 - `cmux`
 - `nvim`
+- `hunk`
 - Neovim setup repo link
+- Hunk diff review repo link
+
+Hunk is recommended for reviewing agent-authored changes from another terminal pane:
+
+```sh
+npm i -g hunkdiff
+hunk diff --watch
+```
 
 ## OS-Level Integration Targets
 

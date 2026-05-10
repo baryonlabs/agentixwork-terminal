@@ -57,6 +57,26 @@ Prototypes/agentixwork-cli/agentixwork new my-app --nvim
 export AGENTIXWORK_PROJECTS_DIR="$HOME/work"
 ```
 
+## 추천 터미널 리뷰 도구
+
+에이전트가 만든 변경사항을 터미널 안에서 바로 리뷰하려면 [Hunk](https://github.com/modem-dev/hunk)를 추천합니다. Hunk는 agentic coder를 위한 review-first 터미널 diff viewer입니다.
+
+설치:
+
+```bash
+npm i -g hunkdiff
+```
+
+자주 쓰는 명령:
+
+```bash
+hunk diff         # 현재 working tree 변경사항 리뷰, untracked 파일 포함
+hunk diff --watch # 에이전트가 파일을 바꾸는 동안 자동 갱신
+hunk show         # 최신 커밋 리뷰
+```
+
+AgentixWork Terminal에서는 한 pane에서 코딩 에이전트를 돌리고, 다른 pane에서 Hunk 리뷰 UI를 띄우면 변경사항을 계속 확인하기 쉽습니다.
+
 ## 기능
 
 <table>

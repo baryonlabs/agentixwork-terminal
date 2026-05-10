@@ -176,7 +176,13 @@ case "$cmd" in
     else
       print "warn - nvim not found on PATH"
     fi
+    if command -v hunk >/dev/null 2>&1; then
+      print "ok - hunk: $(command -v hunk)"
+    else
+      print "warn - hunk not found on PATH; install with: npm i -g hunkdiff"
+    fi
     print "info - recommended Neovim setup: https://github.com/baryonlabs/cmux_setting_vscode_style_nvim"
+    print "info - recommended diff review tool: https://github.com/modem-dev/hunk"
     ;;
 
   *)

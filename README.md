@@ -54,6 +54,26 @@ Set `AGENTIXWORK_PROJECTS_DIR` to choose a different default parent folder:
 export AGENTIXWORK_PROJECTS_DIR="$HOME/work"
 ```
 
+## Recommended Terminal Review Tool
+
+For reviewing agent-authored changes directly in the terminal, AgentixWork recommends [Hunk](https://github.com/modem-dev/hunk), a review-first terminal diff viewer for agentic coders.
+
+Install:
+
+```bash
+npm i -g hunkdiff
+```
+
+Useful commands:
+
+```bash
+hunk diff         # review current working tree changes, including untracked files
+hunk diff --watch # auto-reload while an agent edits files
+hunk show         # review the latest commit
+```
+
+Hunk works well beside AgentixWork Terminal because one pane can run the coding agent while another pane watches the review UI.
+
 ## Features
 
 <table>
